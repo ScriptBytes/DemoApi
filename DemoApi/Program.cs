@@ -1,5 +1,3 @@
-
-
 using DemoApi.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
