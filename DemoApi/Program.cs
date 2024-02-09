@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using DemoApi.Auth;
+using DemoApi.Core;
 using DemoApi.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -45,8 +46,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddScoped<UserService>();
+
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+builder.Services.AddTransient<IClaimsTransformation, ClaimsTransformationService>();
 
 var app = builder.Build();
 

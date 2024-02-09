@@ -47,15 +47,14 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var username = credentials[0];
         var password = credentials[1];
         
-        if (username != "like" && password != "subscribe")
+        if (username != "test@fake.com" && password != "subscribe")
         {
             return AuthenticateResult.Fail("Authentication failed");
         }
         
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, username),
-            new Claim(ClaimTypes.Role, "Admin")
+            new Claim(ClaimTypes.NameIdentifier, username)
         };
         var identity = new ClaimsIdentity(claims, "Basic");
         var claimsPrincipal = new ClaimsPrincipal(identity);

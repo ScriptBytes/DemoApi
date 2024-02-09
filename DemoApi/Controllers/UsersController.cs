@@ -1,3 +1,4 @@
+using DemoApi.Core;
 using DemoApi.Data;
 using DemoApi.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace DemoApi.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly DefaultDbContext context;
+    private readonly UserService userService;
 
-    public UsersController(DefaultDbContext context)
+    public UsersController(DefaultDbContext context, UserService userService)
     {
         this.context = context;
+        this.userService = userService;
     }
 
     [HttpGet(Name = "AllUsers")]
@@ -90,5 +93,13 @@ public class UsersController : ControllerBase
 
         // context.Remove(existing);
         // await context.SaveChangesAsync()
+    }
+    
+    [HttpGet("roles", Name = "UserRoles")]
+    public async Task<ActionResult> GetRoles(string email)
+    {
+        var roles = await userService.UserRoles(email);
+
+        return Ok(roles);
     }
 }
