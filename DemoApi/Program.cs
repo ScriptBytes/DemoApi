@@ -54,6 +54,8 @@ builder.Services.AddAuthentication("BasicAuthentication")
 
 builder.Services.AddTransient<IClaimsTransformation, ClaimsTransformationService>();
 
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
